@@ -32,6 +32,7 @@ public class CollectionsMain {
 
         long insertTime = benchmark.perform(col, new InsertCommand());
         resultTable.setInsertTime(insertTime);
+				long findTime = benchmark.perform(col, new FindCommand());
 
         results.add(resultTable);
     }
