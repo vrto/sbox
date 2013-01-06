@@ -6,6 +6,7 @@ public class ResultTable<T> {
 
     private final Collection<T> collection;
     private long insertTime;
+    private long deleteTime;
 
     public ResultTable(Collection<T> collection) {
         this.collection = collection;
@@ -23,4 +24,11 @@ public class ResultTable<T> {
         return insertTime;
     }
 
+    public long getDeleteTime() {
+        return deleteTime;
+    }
+
+    public void setDeleteTime(long deleteTime) {
+        this.deleteTime = deleteTime;
+    }
 }

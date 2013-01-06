@@ -1,5 +1,6 @@
 package sk.vrto.collect;
 
+import sk.vrto.collect.commands.DeleteCommand;
 import sk.vrto.collect.commands.InsertCommand;
 
 import java.util.*;
@@ -33,6 +34,8 @@ public class CollectionsMain {
         long insertTime = benchmark.perform(col, new InsertCommand());
         resultTable.setInsertTime(insertTime);
 				long findTime = benchmark.perform(col, new FindCommand());
+        long deleteTime = benchmark.perform(col, new DeleteCommand());
+        resultTable.setDeleteTime(deleteTime);
 
         results.add(resultTable);
     }
