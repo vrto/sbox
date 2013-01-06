@@ -40,13 +40,14 @@ public class CollectionsMain {
 
     private static void printResults(List<ResultTable<String>> results) {
         StringBuilder sb = new StringBuilder();
-        String format = "%48s%12s%12s\n";
+        String format = "%48s%12s%12s%12s\n";
 
-        sb.append(String.format(format, "Collection name", "Insert", "Find"));
+        sb.append(String.format(format, "Collection name", "Insert", "Find", "Delete"));
         sb.append("\n");
         for (ResultTable<String> table : results) {
             String collectionName = table.getCollection().getClass().getName();
-            sb.append(String.format(format, collectionName, table.getInsertTime(), table.getFindTime()));
+            sb.append(String.format(format, collectionName, table.getInsertTime(),
+                    table.getFindTime(), table.getDeleteTime()));
         }
 
         System.out.println(sb.toString());
