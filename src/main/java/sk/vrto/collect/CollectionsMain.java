@@ -1,10 +1,9 @@
 package sk.vrto.collect;
 
+import sk.vrto.collect.commands.FindCommand;
 import sk.vrto.collect.commands.InsertCommand;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class CollectionsMain {
 
@@ -17,12 +16,10 @@ public class CollectionsMain {
         benchmarkCollection(new LinkedList<String>());
         benchmarkCollection(new Vector<String>());
         benchmarkCollection(new Stack<String>());
-        benchmarkCollection(new CopyOnWriteArrayList<String>());
 
         benchmarkCollection(new HashSet<String>());
         benchmarkCollection(new LinkedHashSet<String>());
         benchmarkCollection(new TreeSet<String>());
-        benchmarkCollection(new CopyOnWriteArraySet<String>());
 
         printResults(results);
     }
@@ -32,19 +29,21 @@ public class CollectionsMain {
 
         long insertTime = benchmark.perform(col, new InsertCommand());
         resultTable.setInsertTime(insertTime);
-				long findTime = benchmark.perform(col, new FindCommand());
+        long findTime = benchmark.perform(col, new FindCommand());
+        resultTable.setFindTime(findTime);
 
         results.add(resultTable);
     }
 
     private static void printResults(List<ResultTable<String>> results) {
         StringBuilder sb = new StringBuilder();
-        String format = "%48s%12s\n";
+        String format = "%48s%12s%12s\n";
 
-        sb.append(String.format(format, "Collection name", "Insert"));
+        sb.append(String.format(format, "Collection name", "Insert", "Find"));
         sb.append("\n");
         for (ResultTable<String> table : results) {
-            sb.append(String.format(format, table.getCollection().getClass().getName(), table.getInsertTime()));
+            String collectionName = table.getCollection().getClass().getName();
+            sb.append(String.format(format, collectionName, table.getInsertTime(), table.getFindTime()));
         }
 
         System.out.println(sb.toString());

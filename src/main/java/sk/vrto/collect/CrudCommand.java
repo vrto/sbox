@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface CrudCommand<T> {
 
-    int ITERATIONS = 100_000;
+    int ITERATIONS = 10_000;
 
     void execute(Collection<T> collection);
 
